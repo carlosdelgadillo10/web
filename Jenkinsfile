@@ -10,19 +10,14 @@ node {
     }
 
     stage('Push image') {
-        withCredentials([usernamePassword( credentialsId: 'dockerHub', usernameVariable: 'USER', passwordVariable: 'PASSWORD')]) {
-            def registry_url = "registry.hub.docker.com/"
-            sh "docker login -u $USER -p $PASSWORD ${registry_url}"
-            withDockerRegistry([ credentialsId: "dockerHub", url: "registry.hub.docker.com/" ]) {
-                // Push your image now
-                        app.push()
-                        app.push("latest")
-            }
-        }
+        withDockerRegistry([ credentialsId: "dockerHub", url: "registry.hub.docker.com/" ]) {
+        app.push()
+        app.push("latest")
+    }
     }
 
     stage('Deploy') {
-        sh ("docker run -d -p 3333:3333 ${dockerhubaccountid}/${application}:${BUILD_NUMBER}")
+        sh ("docker run -d -p 5000:5000 ${dockerhubaccountid}/${application}:${BUILD_NUMBER}")
     }
 
     stage('Remove old images') {
