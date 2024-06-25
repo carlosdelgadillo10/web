@@ -1,5 +1,4 @@
 #Pagina web
-#nuevo cambio 6
 from flask import Flask, render_template, request, jsonify
 import requests
 
