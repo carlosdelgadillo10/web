@@ -31,7 +31,7 @@ pipeline {
                     '''
 
                     // Ejecutar el contenedor en segundo plano
-                    sh 'docker run -d -p 5000:5000 --name ${DOCKER_IMAGE}_container ${DOCKER_IMAGE}'
+                    sh 'docker run -d -p 5000:5000 --name ${DOCKER_IMAGE}_container ${DOCKER_IMAGE}:${env.BUILD_ID}'
                 }
             }
         }
