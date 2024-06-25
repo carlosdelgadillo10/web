@@ -19,7 +19,19 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    dockerImage = docker.build("${DOCKER_IMAGE}:${env.BUILD_ID}")
+                    // Construir la imagen Docker
+                    docker.build("${DOCKER_IMAGE}:${env.BUILD_ID}", "-t ${DOCKER_IMAGE} .")
+                    
+                    // Detener y eliminar el contenedor si ya está en ejecución (opcional)
+                    sh '''
+                    if [ "$(docker ps -q -f name=${DOCKER_IMAGE}_container)" ]; then
+                        docker stop ${DOCKER_IMAGE}_container
+                        docker rm ${DOCKER_IMAGE}_container
+                    fi
+                    '''
+
+                    // Ejecutar el contenedor en segundo plano
+                    sh 'docker run -d -p 5000:5000 --name ${DOCKER_IMAGE}_container ${DOCKER_IMAGE}'
                 }
             }
         }
