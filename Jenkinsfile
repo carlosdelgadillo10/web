@@ -13,7 +13,7 @@ node {
     stage('Test image') {
 
         app.inside {
-            bat 'echo "Tests passed"'
+            sh 'echo "Tests passed"'
         }
     }
 
