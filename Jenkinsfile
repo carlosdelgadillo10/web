@@ -26,7 +26,7 @@ node {
     }
     
     stage('Trigger ManifestUpdate') {
-                echo "holaa"
+                echo "holiii"
 
         }
 }
