@@ -7,7 +7,9 @@ node {
     }
 
     stage('Build image') {
-  
+        environment {
+                  HOME="."
+                }
        app = docker.build("carlosdelgadillo/web")
     }
 
