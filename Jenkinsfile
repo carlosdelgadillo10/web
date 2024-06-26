@@ -1,3 +1,4 @@
+
 node {
     def app
 
@@ -18,7 +19,7 @@ node {
     }
     
     stage('Trigger ManifestUpdate') {
-                echo "holiii"
+                echo "hola como estas"
 
         }
 }
