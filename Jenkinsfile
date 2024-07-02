@@ -13,7 +13,7 @@ node {
     stage('Deploy for Testing') {
             steps {
                 script {
-                    docker.run("carlosdelgadillo/web", "-d -p 5000:80")
+                    docker.run("carlosdelgadillo/web", "-d -p 5000:5000")
                 }
             }
         }
