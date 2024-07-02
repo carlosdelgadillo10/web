@@ -13,7 +13,17 @@ node {
     stage('Deploy for Testing') {
             steps {
                 script {
-                    docker.run("carlosdelgadillo/web", "-d -p 5000:80")
+                    try {
+                        sh '''
+                            # Ejecutar el contenedor de la aplicación
+                            docker run -d -p 5000:5000 carlosdelgadillo/web
+
+                            # Verificar que el contenedor esté en ejecución
+                            docker ps
+                        '''
+                    } catch (Exception e) {
+                        error "Failed to deploy the application for testing: ${e.message}"
+                    }
                 }
             }
         }
@@ -22,7 +32,7 @@ node {
                 script {
                     // Usando OWASP ZAP Docker container para ejecutar el análisis
                     sh '''
-                        docker run -t --network host owasp/zap2docker-stable zap-baseline.py \
+                        docker run -t --network host  zap-baseline.py \
                         -t http://localhost:5000 -r zap_report.html
                     '''
                 }
