@@ -35,12 +35,10 @@ node {
         script {
             try {
                 sh '''
-                    # Usando OWASP ZAP Docker container para ejecutar el análisis
-                    docker run --network host -v $(pwd):/zap/wrk/ ghcr.io/zaproxy/zaproxy:stable zap-baseline.py \
-                        -t http://localhost:5000 -r zap_report.html
-
-                    # Verificar si el reporte de ZAP fue generado
-                    ls -l zap_report.html
+                    docker run --network host -v $(pwd):/zap/wrk/ ghcr.io/zaproxy/zaproxy:stable bash -c "\
+                    chmod -R 777 /zap/wrk && \
+                    cp /path/to/your.yaml /zap/wrk/zap.yaml && \
+                    zap-baseline.py -t http://localhost:5000 -r zap_report.html"
                 '''
             } catch (Exception e) {
                 error "DAST analysis failed: ${e.message}"
