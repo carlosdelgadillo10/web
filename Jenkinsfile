@@ -31,24 +31,7 @@ node {
         }
     }
 
-    stage('DAST Analysis') {
-        script {
-            try {
-                sh '''
-                    docker run --network host -v $(pwd):/zap/wrk/ ghcr.io/zaproxy/zaproxy:stable bash -c "\
-                    chmod -R 777 /zap/wrk && \
-                    cp /path/to/your.yaml /zap/wrk/zap.yaml && \
-                    zap-baseline.py -t http://localhost:5000 -r zap_report.html"
-                '''
-            } catch (Exception e) {
-                error "DAST analysis failed: ${e.message}"
-            }
-        }
-    }
 
-    stage('Archive Results') {
-        archiveArtifacts artifacts: 'zap_report.html', allowEmptyArchive: true
-    }
 
     stage('Push image') {
         script {
