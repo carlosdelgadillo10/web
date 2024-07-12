@@ -1,6 +1,5 @@
 # Dockerfile para Flask
 FROM python:3.11-slim
-ENV PYTHONUNBUFFERED=1
 
 # Establecer el directorio de trabajo
 RUN mkdir /app
