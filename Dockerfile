@@ -1,5 +1,6 @@
 # Dockerfile para Flask
 FROM python:3.11-slim
+ENV PYTHONUNBUFFERED=1
 
 # Establecer el directorio de trabajo
 RUN mkdir /app
@@ -15,7 +16,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY / .
 
 
-EXPOSE 5000
+EXPOSE 8080
 
-CMD ["python", "app.py"]
+CMD ["python", "app.py", "8080"]
 
