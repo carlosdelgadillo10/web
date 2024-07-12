@@ -1,62 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Calculadora </title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
-</head>
-<body>
-    <div class="calculator">
-        <form name="calculator" action="/calcular" method="post">
-            <input class="display" type="text" name="expression" id="expression" readonly>
-            <div class="keys">
-                <input type="button" value="7" onclick="agregar('7')">
-                <input type="button" value="8" onclick="agregar('8')">
-                <input type="button" value="9" onclick="agregar('9')">
-                <input type="button" value="/" onclick="agregar('/')">
-                <br>
-                <input type="button" value="4" onclick="agregar('4')">
-                <input type="button" value="5" onclick="agregar('5')">
-                <input type="button" value="6" onclick="agregar('6')">
-                <input type="button" value="*" onclick="agregar('*')">
-                <br>
-                <input type="button" value="1" onclick="agregar('1')">
-                <input type="button" value="2" onclick="agregar('2')">
-                <input type="button" value="3" onclick="agregar('3')">
-                <input type="button" value="-" onclick="agregar('-')">
-                <br>
-                <input type="button" value="0" onclick="agregar('0')">
-                <input type="button" value="." onclick="agregar('.')">
-                <input type="submit" value="=">
-                <input type="button" value="+" onclick="agregar('+')">
-                <br>
-                <input type="button" value="C" onclick="limpiar()">
-            </div>
-        </form>
-    </div>
-
-    <script>
-        function agregar(value) {
-            document.getElementById('expression').value += value;
-        }
-
-        function limpiar() {
-            document.getElementById('expression').value = '';
-        }
-    </script>
-
-    <script>
-        // Esta función se llama después de recibir el resultado desde Flask
-        function mostrarResultado(resultado) {
-            document.getElementById('expression').value = resultado;
-        }
-    </script>
-
-    <script>
-        // Muestra el resultado recibido del servidor Flask
-        {% if resultado %}
-        mostrarResultado('{{ resultado }}');
-        {% endif %}
-    </script>  
-</body>
+  <head>
+    <title></title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- <link href="static/css/style.css" rel="stylesheet"> -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="image"></div>
+  </body>
 </html>

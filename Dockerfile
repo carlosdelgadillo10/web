@@ -10,7 +10,13 @@ WORKDIR /app
 COPY /requirements.txt .
 
 # Instalar dependencias
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt \
+    && pip install --upgrade pipenv\
+    && apt-get clean \
+    && apt-get update \
+    && apt install -y build-essential \
+    && apt install -y libmariadb3 libmariadb-dev \
+    && pip install --upgrade -r /opt/microservices/requirements.txt
 
 # Copiar el código de la aplicación Antes era web/ .
 COPY / .
