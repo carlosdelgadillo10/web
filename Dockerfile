@@ -2,6 +2,7 @@
 FROM python:3.11-slim
 
 # Establecer el directorio de trabajo
+RUN mkdir /app
 WORKDIR /app
 
 # Copiar requisitos
@@ -15,5 +16,6 @@ COPY / .
 
 EXPOSE 5000
 
+ENTRYPOINT ["python"]
 CMD ["python", "app.py"]
 
