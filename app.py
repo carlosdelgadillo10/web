@@ -15,7 +15,7 @@ def calcular():
     # Realiza la solicitud al microservicio correspondiente
     if '+' in expression:
         num1, num2 = map(float, expression.split('+'))
-        response = requests.post('http://127.0.0.1:8085/sumar', json={'num1': num1, 'num2': num2})
+        response = requests.post('http://192.168.49.1:8085/sumar', json={'num1': num1, 'num2': num2})
     elif '-' in expression:
         num1, num2 = map(float, expression.split('-'))
         response = requests.post('http://192.168.56.1:8004/restar', json={'num1': num1, 'num2': num2})
