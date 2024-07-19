@@ -6,10 +6,10 @@ import os
 app = Flask(__name__)
 
 # Obtener las IPs de los microservicios desde las variables de entorno sin valores por defecto
-URL_SUMA = os.getenv('URL_SUMA')
-URL_RESTA = os.getenv('RESTAR_END')
-MULTIPLICAR_END = os.getenv('MULTIPLICAR_END')
-DIVIDIR_END = os.getenv('DIVIDIR_END')
+URL_SUMA = os.getenv('URL_SUMAR')
+URL_RESTA = os.getenv('URL_RESTAR')
+URL_MULTIPLICAR = os.getenv('URL_MULTIPLICAR')
+URL_DIVIDIR = os.getenv('URL_DIVIDIR')
 # Obtener el puerto desde la variable de entorno
 PUERTO = int(os.getenv('PUERTO'))
 
@@ -34,10 +34,10 @@ def calcular():
         response = requests.post(URL_RESTA, json={'num1': num1, 'num2': num2})
     elif '*' in expression:
         num1, num2 = map(float, expression.split('*'))
-        response = requests.post(MULTIPLICAR_END, json={'num1': num1, 'num2': num2})
+        response = requests.post(URL_MULTIPLICAR, json={'num1': num1, 'num2': num2})
     elif '/' in expression:
         num1, num2 = map(float, expression.split('/'))
-        response = requests.post(DIVIDIR_END, json={'num1': num1, 'num2': num2})
+        response = requests.post(URL_DIVIDIR, json={'num1': num1, 'num2': num2})
     else:
         return render_template('index.html', resultado='Error: Operación no válida')
 
