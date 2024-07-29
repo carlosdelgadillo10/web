@@ -20,7 +20,7 @@ node {
                     docker rm test-app || true
 
                     # Ejecutar el contenedor de la aplicación
-                    docker run -d --name test-app -p 5000:5000 carlosdelgadillo/web
+                    docker run -d --name test-app -p 9000:9000 carlosdelgadillo/web
 
                     # Verificar que el contenedor esté en ejecución
                     docker ps

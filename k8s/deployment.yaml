@@ -15,19 +15,19 @@ spec:
     spec:
       containers:
       - name: web
-        image: carlosdelgadillo/web:v2
+        image: carlosdelgadillo/web:v3
         ports:
-        - containerPort: 5000
+        - containerPort: 9000
         env:
         - name: URL_SUMAR
-          value: "http://192.168.49.2:8085/sumar"  # Reemplaza con la dirección del servicio de suma
+          value: "http://192.168.49.2:31183/sumar"  # Reemplaza con la dirección del servicio de suma
         - name: URL_RESTAR
-          value: "http://192.168.49.2:8004/restar"  # Reemplaza con la dirección del servicio de resta
+          value: "http://192.168.49.2:31527/restar"  # Reemplaza con la dirección del servicio de resta
         #- name: URL_MULTIPLICAR
         #  value: "http://direccion-multiplicar"  # Reemplaza con la dirección del servicio de multiplicar
         #- name: URL_DIVIDIR
         #  value: "http://direccion-dividir"  # Reemplaza con la dirección del servicio de dividir
         - name: PUERTO
-          value: "5000"  # El puerto en el que correrá tu aplicación
+          value: "9000"  # El puerto en el que correrá tu aplicación
 
 
