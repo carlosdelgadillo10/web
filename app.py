@@ -2,6 +2,7 @@
 from flask import Flask, render_template, request, jsonify
 import requests
 import os
+from prometheus_client import start_http_server, Summary, Counter
 
 app = Flask(__name__)
 
@@ -13,12 +14,19 @@ URL_DIVIDIR = os.getenv('URL_DIVIDIR')
 # Obtener el puerto desde la variable de entorno
 PUERTO = int(os.getenv('PUERTO'))
 
+# Crear métricas de Prometheus
+REQUEST_COUNT = Counter('web_requests_total', 'Total number of requests made')
+REQUEST_LATENCY = Summary('web_request_latency_seconds', 'Latency of requests in seconds')
+
+
 @app.route('/')
 def index():
     return render_template('index.html', resultado='')
 
 @app.route('/calcular', methods=['POST'])
+@REQUEST_LATENCY.time()
 def calcular():
+    REQUEST_COUNT.inc()
     expression = request.form['expression']
 
     # Verificar que todas las URLs necesarias estén definidas
@@ -47,5 +55,10 @@ def calcular():
     else:
         return render_template('index.html', resultado='Error en la solicitud al microservicio')
 
+@app.route('/metrics')
+def metrics():
+    return jsonify({ 'metrics': 'Prometheus metrics available' }), 200
+
 if __name__ == '__main__':
+    start_http_server(8000)  # Exponer las métricas en el puerto 8000
     app.run(host='0.0.0.0', port=PUERTO) #host='0.0.0.0' hace que la aplicación esté accesible desde cualquier dirección IP de la máquina.
