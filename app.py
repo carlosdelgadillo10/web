@@ -2,7 +2,7 @@
 from flask import Flask, render_template, request, jsonify
 import requests
 import os
-from prometheus_client import start_http_server, Summary, Counter
+from prometheus_client import start_http_server, Summary, Counter, generate_latest
 
 app = Flask(__name__)
 
@@ -57,7 +57,7 @@ def calcular():
 
 @app.route('/metrics')
 def metrics():
-    return jsonify({ 'metrics': 'Prometheus metrics available' }), 200
+    return generate_latest(), 200
 
 if __name__ == '__main__':
     start_http_server(8000)  # Exponer las métricas en el puerto 8000
