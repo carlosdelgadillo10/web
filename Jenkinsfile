@@ -152,36 +152,18 @@ pipeline {
                 sh 'kubectl apply -f ./k8s/ingress.yaml'
                 // Verifica si el servicio ya existe antes de exponerlo
                 // Verifica si el servicio ya existe y, si no, expónlo
-                /*sh '''
+                sh '''
                     if ! kubectl -n suma get service suma-deployment --ignore-not-found > /dev/null 2>&1; then
                         echo "El servicio no existe, exponiéndolo ahora..."
                         kubectl -n suma expose deployment suma-deployment --type=NodePort --port=9000
                     else
                         echo "El servicio suma-deployment ya existe, no se necesita exponerlo nuevamente."
                     fi
-                '''*/
+                '''
                 }
             }
         }
-        stage('Show Configured URLs') {
-            steps {
-                script {
-                    // Mostrar las variables de entorno en la consola
-                    echo "Configured URLs:"
-                    echo "URL_SUMAR: ${env.URL_SUMAR}"
-                    echo "URL_RESTAR: ${env.URL_RESTAR}"
-                    echo "URL_MULTIPLICAR: ${env.URL_MULTIPLICAR}"
-                    echo "URL_DIVIDIR: ${env.URL_DIVIDIR}"
-                    echo "PUERTO: ${env.PUERTO}"
 
-                    // Esperar a que el servicio esté en ejecución
-                    sleep(time: 30, unit: 'SECONDS')
-
-                    // Hacer una solicitud al endpoint /urls de la aplicación
-                    sh 'curl http://localhost:${env.PUERTO}/urls'
-                }
-            }
-        }
         
     }
     
