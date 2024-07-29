@@ -166,6 +166,15 @@ pipeline {
 
         
     }
+
+    post {
+        success {
+            slackSend (color: '#00FF00', message: "Build exitoso: ${env.JOB_NAME} [${env.BUILD_NUMBER}] (<${env.BUILD_URL}|Open>)")
+        }
+        failure {
+            slackSend (color: '#FF0000', message: "Build fallido: ${env.JOB_NAME} [${env.BUILD_NUMBER}] (<${env.BUILD_URL}|Open>)")
+        }
+    }
     
 /*    post {
         failure {
