@@ -47,5 +47,23 @@ def calcular():
     else:
         return render_template('index.html', resultado='Error en la solicitud al microservicio')
 
+@app.route('/urls', methods=['GET'])
+def get_urls():
+    urls = {
+        "URL_SUMAR": URL_SUMA,
+        "URL_RESTAR": URL_RESTA,
+        "URL_MULTIPLICAR": URL_MULTIPLICAR,
+        "URL_DIVIDIR": URL_DIVIDIR,
+        "PUERTO": PUERTO
+    }
+    return jsonify(urls)
+
+
 if __name__ == '__main__':
+    print(f"Starting application with the following URLs:\n"
+          f"URL_SUMAR: {URL_SUMA}\n"
+          f"URL_RESTAR: {URL_RESTA}\n"
+          f"URL_MULTIPLICAR: {URL_MULTIPLICAR}\n"
+          f"URL_DIVIDIR: {URL_DIVIDIR}\n"
+          f"PUERTO: {PUERTO}")
     app.run(host='0.0.0.0', port=PUERTO) #host='0.0.0.0' hace que la aplicación esté accesible desde cualquier dirección IP de la máquina.
