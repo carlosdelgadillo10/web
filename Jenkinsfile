@@ -178,27 +178,19 @@ pipeline {
 
     post {
         success {
+            script{
+            def serviceName = 'web-service'
+            def namespace = 'web'
+            def serviceUrl = sh(script: "kubectl get svc ${serviceName} -n ${namespace} -o jsonpath='{.status.loadBalancer.ingress[0].hostname}'", returnStdout: true).trim()
+            //envio a slack
             slackSend (color: '#00FF00', message: "Build exitoso: ${env.JOB_NAME} [${env.BUILD_NUMBER}] (<${env.BUILD_URL}|Open>)")
+            slackSend(channel: '#jenkins', message: "La URL del servicio de Kubernetes es: ${serviceUrl}")
+            }
         }
         failure {
             slackSend (color: '#FF0000', message: "Build fallido: ${env.JOB_NAME} [${env.BUILD_NUMBER}] (<${env.BUILD_URL}|Open>)")
         }
     }
-    
-/*    post {
-        failure {
-            emailext (
-                subject: "BUILD FAILED: ${env.JOB_NAME} ${env.BUILD_NUMBER}",
-                body: """
-                    <p><b>El proyecto ${env.JOB_NAME} #${env.BUILD_NUMBER} ha fallado.</b></p>
-                    <p>Ver detalles en: <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
-                    """,
-                recipientProviders: [[$class: 'DevelopersRecipientProvider']],
-                to: "carlos.degadillo102003@gmail.com"
-            )
-        }
-    }
-*/     
 
    
 }
