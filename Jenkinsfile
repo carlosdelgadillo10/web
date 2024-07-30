@@ -190,4 +190,22 @@ pipeline {
 
    
 }
+/*
+Overview dockerfile y que aparezca en dockerhub----
+Linux commands acostumbrarse.
 
+microservicio netcore y java y unitests
+Unitest los 3
+
+PRDUCTION (despliegue por aprobacion humana) mas comun por slack
+
+circulo amarillo pendiente kubernetes
+
+Prometheus grafana----------- hacer mi dashboard
+plugin jenkins visuales
+
+Mi pipeline tiene que mandarlo todo a Qa
+Cuando termine CI se mande a llamar el de QA (suma,resta,mul,tiv,web)
+Jmeter how to use.
+horizontalpodautoscaler in minikube
+*/
