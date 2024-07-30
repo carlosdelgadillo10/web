@@ -169,7 +169,7 @@ pipeline {
 
                     def serviceName = 'web-service'
                     def namespace = 'web'
-                    def serviceUrl = sh(script: "kubectl get svc ${serviceName} -n ${namespace} -o jsonpath='{.status.loadBalancer.ingress[0].hostname}'", returnStdout: true).trim()
+                    def serviceUrl = sh(script: "minikube service -n ${namespace} ${serviceName} --url ", returnStdout: true).trim()
                     //envio a slack
                     slackSend(channel: '#jenkins', message: "La URL del servicio de Kubernetes es: ${serviceUrl}")
                     // Obtiene el último commit
