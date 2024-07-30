@@ -168,7 +168,7 @@ pipeline {
                 script {
                     def serviceUrl = 'http://192.168.49.2:32103'
                     //envio a slack
-                    slackSend(channel: '#jenkins', message: "La URL del servicio de Kubernetes es: ${serviceUrl}. Json de prueba: {'num1':2, 'num2':3}")
+                    slackSend(channel: '#jenkins', message: "La URL del servicio de Kubernetes es: ${serviceUrl}. Json de prueba:  {'num1':2, 'num2':3}")
                     // Obtiene el último commit
                     def commitMessage = sh(script: 'git log -1 --pretty=format:\'%h - %an, %ar : %s\'', returnStdout: true).trim()
 
