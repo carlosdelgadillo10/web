@@ -166,6 +166,12 @@ pipeline {
         stage('Notify Commit') {
             steps {
                 script {
+
+                    def serviceName = 'web-service'
+                    def namespace = 'web'
+                    def serviceUrl = sh(script: "kubectl get svc ${serviceName} -n ${namespace} -o jsonpath='{.status.loadBalancer.ingress[0].hostname}'", returnStdout: true).trim()
+                    //envio a slack
+                    slackSend(channel: '#jenkins', message: "La URL del servicio de Kubernetes es: ${serviceUrl}")
                     // Obtiene el último commit
                     def commitMessage = sh(script: 'git log -1 --pretty=format:\'%h - %an, %ar : %s\'', returnStdout: true).trim()
 
@@ -178,14 +184,7 @@ pipeline {
 
     post {
         success {
-            script{
-            def serviceName = 'web-service'
-            def namespace = 'web'
-            def serviceUrl = sh(script: "kubectl get svc ${serviceName} -n ${namespace} -o jsonpath='{.status.loadBalancer.ingress[0].hostname}'", returnStdout: true).trim()
-            //envio a slack
             slackSend (color: '#00FF00', message: "Build exitoso: ${env.JOB_NAME} [${env.BUILD_NUMBER}] (<${env.BUILD_URL}|Open>)")
-            slackSend(channel: '#jenkins', message: "La URL del servicio de Kubernetes es: ${serviceUrl}")
-            }
         }
         failure {
             slackSend (color: '#FF0000', message: "Build fallido: ${env.JOB_NAME} [${env.BUILD_NUMBER}] (<${env.BUILD_URL}|Open>)")
