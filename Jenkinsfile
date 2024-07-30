@@ -163,8 +163,14 @@ pipeline {
                 }
             }
         }
-
-        
+        stage('Commit Notification') {
+            steps {
+                script {
+                    def commitMessage = sh(script: 'git log -1 --pretty=format:%h - %an, %ar : %s', returnStdout: true).trim()
+                    slackSend (channel: '#your-channel', message: "Nuevo commit:\n${commitMessage}")
+                }
+            }
+        }
     }
 
     post {
