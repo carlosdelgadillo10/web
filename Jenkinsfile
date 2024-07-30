@@ -163,7 +163,7 @@ pipeline {
                 }
             }
         }
-        }stage('Notify Commit') {
+        stage('Notify Commit') {
             steps {
                 script {
                     // Obtiene el último commit
