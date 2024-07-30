@@ -180,8 +180,7 @@ pipeline {
 
     post {
         success {
-            slackSend (color: '#00FF00', message: "Build exitoso: ${env.JOB_NAME} [${env.BUILD_NUMBER}] (<${env.BUILD_URL}|Open>)")
-            slackSend(channel: '#jenkins', message: "La URL del servicio de Kubernetes es: http://192.168.49.2:32103")
+            slackSend (color: '#00FF00', message: "Build exitoso: ${env.JOB_NAME} [${env.BUILD_NUMBER}] (<${env.BUILD_URL}|Open>) La URL del servicio de Kubernetes es: http://192.168.49.2:32103")
         }
         failure {
             slackSend (color: '#FF0000', message: "Build fallido: ${env.JOB_NAME} [${env.BUILD_NUMBER}] (<${env.BUILD_URL}|Open>)")
