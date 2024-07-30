@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: web-ingress
-  namespace: microservices_CI
+  namespace: microservices-ci
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:

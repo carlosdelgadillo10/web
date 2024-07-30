@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: web-service
-  namespace: microservices_CI
+  namespace: microservices-ci
 spec:
   selector:
     app: web
