@@ -166,10 +166,7 @@ pipeline {
         stage('Notify Commit') {
             steps {
                 script {
-
-                    def serviceName = 'web-service'
-                    def namespace = 'web'
-                    def serviceUrl = sh(script: "minikube service -n ${namespace} ${serviceName} --url ", returnStdout: true).trim()
+                    def serviceUrl = 'http://192.168.49.2:32103'
                     //envio a slack
                     slackSend(channel: '#jenkins', message: "La URL del servicio de Kubernetes es: ${serviceUrl}")
                     // Obtiene el último commit
