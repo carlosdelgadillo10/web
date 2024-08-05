@@ -20,13 +20,13 @@ spec:
         - containerPort: 9000
         env:
         - name: URL_SUMAR
-          value: "http://192.168.49.2:30655/sumar"  # Reemplaza con la dirección del servicio de suma
+          value: "http://192.168.49.2:30444/sumar"  # Reemplaza con la dirección del servicio de suma
         - name: URL_RESTAR
-          value: "http://192.168.49.2:32543/restar"  # Reemplaza con la dirección del servicio de resta
+          value: "http://192.168.49.2:31674/restar"  # Reemplaza con la dirección del servicio de resta
         - name: URL_MULTIPLICAR
-          value: "http://192.168.49.1:8003/multiply"  # Reemplaza con la dirección del servicio de multiplicar
+          value: "http://192.168.49.2:32636/multiplication"  # Reemplaza con la dirección del servicio de multiplicar
         - name: URL_DIVIDIR
-          value: "http://192.168.49.2:32324/divide"  # Reemplaza con la dirección del servicio de dividir
+          value: "http://192.168.49.2:32568/divide"  # Reemplaza con la dirección del servicio de dividir
         - name: PUERTO
           value: "9000"  # El puerto en el que correrá tu aplicación
 
