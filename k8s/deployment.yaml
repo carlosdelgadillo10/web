@@ -25,8 +25,8 @@ spec:
           value: "http://192.168.49.2:32543/restar"  # Reemplaza con la dirección del servicio de resta
         - name: URL_MULTIPLICAR
           value: "http://192.168.49.1:8003/multiply"  # Reemplaza con la dirección del servicio de multiplicar
-        #- name: URL_DIVIDIR
-        #  value: "http://direccion-dividir"  # Reemplaza con la dirección del servicio de dividir
+        - name: URL_DIVIDIR
+          value: "http://192.168.49.2:32324/divide"  # Reemplaza con la dirección del servicio de dividir
         - name: PUERTO
           value: "9000"  # El puerto en el que correrá tu aplicación
 
