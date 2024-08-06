@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: web-deployment
-  namespace: microservices-ci
+  namespace: microservices-qa
 spec:
   replicas: 3
   selector:
